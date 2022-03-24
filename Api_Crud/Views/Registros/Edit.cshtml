@@ -32,13 +32,13 @@
     <div class="form-group3">
         <label asp-for="Nome" class="col-md-12 control-label"></label>
         <div class="col-md-12">
-            <input asp-for="Nome" class="form-control" />
+            <input asp-for="Nome" class="form-control" required/>
         </div>
     </div>
     <div class="form-group3 FormRight">
         <label asp-for="DataDeNascimento" class="col-md-12 control-label">Data de Nascimento</label>
         <div class="col-md-12">
-            <input type="date" asp-for="DataDeNascimento" class="form-control" />
+            <input type="date" asp-for="DataDeNascimento" class="form-control" required />
         </div>
     </div>
     @if (Model.Telefone == null)
@@ -56,9 +56,9 @@
                         <option value="TelCel">Telefone Celular</option>
                         <option value="TelCor">Telefone Comercial</option>
                     </select>                         
-                    <input asp-for="Telefone[i]" class="form-control" name="Telefone" maxlength="15"/>
+                    <input asp-for="Telefone[i]" class="form-control" name="Telefone" maxlength="15" required/>
+                    <a href="#" class="delete">Deletar</a>  
                 </div>
-                <a href="#" class="delete">Deletar</a>   
             }
         </div>
     </div>
@@ -73,7 +73,7 @@
             @foreach (var item in Model.Endereco)
             {
                 <div class="col-md-12" style="float:left;">
-                    <input asp-for="@item" class="form-control" name="Endereco" />
+                    <input asp-for="@item" class="form-control" name="Endereco" required/>
                     <a href="#" class="delete">Deletar</a>
                 </div>
             }
@@ -82,13 +82,13 @@
     <div class="form-group">
         <label asp-for="CPF" class="col-md-2 control-label"></label>
         <div class="col-md-12">
-            <input asp-for="CPF" class="form-control" maxlength="11" />
+            <input asp-for="CPF" class="form-control" maxlength="11" required/>
         </div>
     </div>
     <div class="form-group">
         <label asp-for="RG" class="col-md-2 control-label"></label>
         <div class="col-md-12">
-            <input asp-for="RG" class="form-control" maxlength="9" />
+            <input asp-for="RG" class="form-control" maxlength="9" required/>
         </div>
     </div>
     <div class="form-group">
