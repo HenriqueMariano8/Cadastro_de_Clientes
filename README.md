@@ -25,7 +25,7 @@ Ao clicar no botão incluir, todos os dados serão incluidos no banco de dados e
 
 ##### Banco de Dados
 Esta aplicação utiliza-se do banco de dados [MongoDB](https://www.mongodb.com/) para armazenamento de dados. A aplicação tentará armazenar os dados em um database com o nome de "D1" e uma collection com o nome de "Registros", caso não haja um ou mais dos requisitos ele criará os requisitos faltantes, seja ele o database ou a collection. 
-Ele utiliza a string de conexão "mongodb://localhost:27017". Caso haja a necessidade de alterar alguma destas informações deve-se utilizar o arquivo appsettings.json. Para alterar o nome da collection utiliza-se o arquivo MongoDbConstext.cs linha 38.
+Ele utiliza a string de conexão "mongodb://localhost:27017". Caso haja a necessidade de alterar alguma destas informações deve-se utilizar o arquivo appsettings.json. Para alterar o nome da collection utiliza-se o arquivo MongoDbContext.cs linha 38.
 
 ##### Considerações Finais
 Caso haja alguma dúvida, deseja uma mudança ou encontre algum problema com o aplicativo entre em contato com o desenvolvedor.
