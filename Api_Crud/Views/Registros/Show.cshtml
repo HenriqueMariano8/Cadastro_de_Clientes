@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Api_Crud.Models.Registros>
+@{
+    ViewBag.Title = "Registros Multiplos";
+}
+
+<style>
+    h2 {
+        position: relative;
+        float: left;
+        margin: 20px 0;
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+<table id="table" class="tableList">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Endereço</th>
+        <th>Ações</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a>
+                    @item.Id
+                </a>
+            </td>
+            <td>
+                <a>
+                    @item.Nome
+                </a>
+            </td>
+            <td>
+                @foreach (var item1 in item.Telefone)
+                {
+                    <a>
+                        @item1
+                    </a>
+                    <br />
+                }
+            </td>
+            <td>
+                @foreach (var item1 in item.Endereco)
+                {
+                    <a>
+                        @item1
+                    </a>
+                    <br />
+                }
+            </td>
+
+            <td>
+                <a href="~/Registros/Edit/@item.Id">
+                    Alterar
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

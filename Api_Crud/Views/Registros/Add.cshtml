@@ -1,0 +1,180 @@
+﻿@model Api_Crud.Models.Registros
+@{
+    ViewBag.Title = "Adicionar Registro";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<style>
+    form {
+        float:left;
+        width:100%;
+    }
+    h2 {
+        position:relative;
+        float:left;
+        margin:20px 0;
+    }
+</style>
+
+<form asp-controller="Registros" asp-action="Add" method="post" class="form-horizon" role="form">
+    <div class="form-horizon">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group3">
+            <label asp-for="Nome" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group3 FormRight">
+            <label asp-for="DataDeNascimento" class="col-md-12 control-label">Data de Nascimento</label>
+            <div class="col-md-12">
+                <input type="date" asp-for="DataDeNascimento" class="form-control" />
+                <span asp-validation-for="DataDeNascimento" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group campo-multiplo">
+                <label asp-for="Telefone" class="col-md-2 control-label"></label>
+                <div class="col-md-12">
+                    <select asp-for="TipoDeTelefone" size="3"> 
+                        <option value="TelRes">Telefone Residencial</option>
+                        <option value="TelCel">Telefone Celular</option>
+                        <option value="TelCor">Telefone Comercial</option>
+                    </select> 
+                    <input asp-for="Telefone" class="form-control" onkeypress="mask(this, mphone);" autocomplete="off" maxlength="15" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <a href="#" class="b-campo-multiplo" title="Telefone">+ Adicionar Telefone</a>
+            </div>
+            <div class="form-group campo-multiplo2 col-md-12">
+                <label asp-for="Endereco" class="col-md-2 control-label">Endereço</label>
+
+                <div class="col-md-12">
+                    <input asp-for="Endereco" class="form-control" />
+                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                </div>
+                <a href="#" class="b-campo-multiplo2" title="Endereco">+ Adicionar Endereço </a>
+            </div>
+        </div>
+        
+        <div class="form-group3">
+            <label asp-for="CPF" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="CPF" class="form-control cpf" maxlength="11" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group3 FormRight">
+            <label asp-for="RG" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="RG" class="form-control rg" maxlength="9" />
+                <span asp-validation-for="RG" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Facebook" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="Facebook" class="form-control" />
+                <span asp-validation-for="Facebook" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Linkedin" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="Linkedin" class="form-control" />
+                <span asp-validation-for="Linkedin" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Twitter" class="col-md-2 control-label"></label>
+            <div class="col-md-12">
+                <input asp-for="Twitter" class="form-control" />
+                <span asp-validation-for="Twitter" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Instagran" class="col-md-2 control-label">Instagram</label>
+            <div class="col-md-12">
+                <input asp-for="Instagran" class="form-control" />
+                <span asp-validation-for="Instagran" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" value="Incluir" class="btn" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var max_fields = 5;
+        var wrapper = $(".campo-multiplo");
+        var add_button = $(".b-campo-multiplo");
+        var wrapper2 = $(".campo-multiplo2");
+        var add_button2 = $(".b-campo-multiplo2");
+
+        var x = 1;
+        $(add_button).click(function (e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                $(wrapper).append('<div style="width:100%; float:left;"><select name="TipoDeTelefone" size="3"><option value="TelRes">Telefone Residencial</option><option value="TelCel">Telefone Celular</option><option value="TelCor">Telefone Comercial</option></select><input type="text" name="Telefone" onkeypress="mask(this, mphone);" autocomplete="off" class="form-control-add" maxlength="15" /><a href="#" class="delete">Deletar</a></div>')
+            } else {
+                alert('Alcançou o Limite')
+            }
+        });
+        $(add_button2).click(function (e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                $(wrapper2).append('<div style="width:100%; float:left;"><input type="text" name="Endereco" class="form-control-add"/><a href="#" class="delete">Deletar</a></div>');
+            } else {
+                alert('Alcançou o Limite')
+            }
+        });
+
+        $(wrapper).on("click", ".delete", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+        $(wrapper2).on("click", ".delete", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+
+    });
+
+    function mask(o, f) {
+        setTimeout(function () {
+            var v = mphone(o.value);
+            if (v != o.value) {
+                o.value = v;
+            }
+        }, 1);
+    }
+    function mphone(v) {
+        var r = v.replace(/\D/g, "");
+        r = r.replace(/^0/, "");
+        if (r.length > 10) {
+            r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+        } else if (r.length > 5) {
+            r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+        } else if (r.length > 2) {
+            r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+        } else {
+            r = r.replace(/^(\d*)/, "($1");
+        }
+        return r;
+    }
+
+</script>

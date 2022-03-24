@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API de Registro de Pessoas com MongoDB</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            position: absolute;
+            margin: 20px 0;
+        }
+
+        .search {
+            float: right;
+            margin: 20px 0;
+        }
+
+        .tableList {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tableList td, .tableList th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align:center;
+        }
+
+        .tableList td {
+                font-size: 13px;
+        }
+
+        .tableList th {
+                text-align: center !important;
+        }
+
+        .tableList tr:nth-child(even) {
+                background-color: #f2f2f2;
+        }
+
+        .tableList tr:hover {
+                background-color: #ddd;
+        }
+
+        .tableList th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+         }
+        .footer {
+            position: relative !important;
+            float: left !important;
+        }
+        .form-control-add {
+            float: left;
+            width: 90%;
+            margin: 0 5%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .form-group, .form-group3 {
+            float: left;
+            width: 100%;
+        }
+
+        .form-group3 {
+            width: 45%;
+            margin-bottom:15px;
+        }
+
+        .FormRight {
+            float: right;
+        }
+
+        .campo-multiplo, .campo-multiplo2 {
+            float: left;
+            width: 100%;
+            padding: 2px;
+            background: #e0e0e0;
+            box-sizing: border-box;
+            margin: 10px 0;
+        }
+
+        .b-campo-multiplo, .b-campo-multiplo2, .delete {
+            float: left;
+            font-weight: bold;
+            margin: 5px 0 5px 20px;
+        }
+
+        .delete {
+            margin-left: 55px;
+        }
+
+        .btn {
+            float: left;
+            background: #4CAF50;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .nav {
+            float:right;
+        }
+        .nav li {
+                border-right: 1px solid #495057;
+                padding-right:10px;
+        }
+        .nav li a {
+            padding:0 0 0 10px;
+            color:#495057;
+            
+        }
+        .nav li:last-of-type {
+            border-right: 0;
+            padding-right:0;
+        }
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">API de Registro de Pessoas com MongoDB</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <ul class="nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Registros" asp-action="Add">Incluir Registro</a></li>
+                </ul>
+               
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; Henrique Mariano - Todos os direitos reservados
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

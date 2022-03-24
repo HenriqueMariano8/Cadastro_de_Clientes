@@ -1,0 +1,174 @@
+﻿@model IEnumerable<Api_Crud.Models.Registros>
+@{
+    ViewData["Title"] = "crud api- d1";
+}
+
+<div class="container-xl">
+    <h2>Cadastro de Clientes</h2>
+    
+    <input type="text" id="Nome" onkeyup="Filter()" placeholder="Procure por nomes" class="search">
+
+    <table id="table" class="tableList">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th onclick="sortTable(1)" style="cursor:pointer;">Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th onclick="sortTable(5)" style="cursor:pointer;">CPF</th>
+                <th onclick="sortTable(6)" style="cursor:pointer;">RG</th>
+                <th>Facebook</th>
+                <th>Linkedin</th>
+                <th>Twitter</th>
+                <th>Instagram</th>
+                <th colspan="2">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a>
+                            @item.Id
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.Nome
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.DataDeNascimento
+                        </a>
+                    </td>
+                    <td>
+                        <a href="Registros/Show/@item.Id">
+                            Visualizar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="Registros/Show/@item.Id">
+                            Visualizar
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.CPF
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.RG
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.Facebook
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.Linkedin
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.Twitter
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            @item.Instagran
+                        </a>
+                    </td>
+                    <td>
+                        <a href="Registros/Edit/@item.Id">
+                            Alterar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="Registros/Delete/@item.Id" onclick="return confirm('Tem certeza que quer deletar este item?')">
+                            Deletar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+    function Filter() {
+
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("Nome");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("a")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function sortTable(n) {
+        var table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+        table = document.getElementById("table");
+        switching = true;
+        dir = "asc";
+
+        while (switching) {
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            for (i = 1; i < rows.length - 1; i++) { 
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+       
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Api_Crud.Models.Registros>
+    @{
+        ViewBag.Title = "Todos os Registros";
+    }
+
+    <h2>@ViewBag.Title</h2>
+    <input type="text" id="Nome" onkeyup="Filter()" placeholder="Procure por nomes">
+    <table id="table" class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>CPF</th>
+            <th>RG</th>
+            <th>Facebook</th>
+            <th>Linkedin</th>
+            <th>Twitter</th>
+            <th>Instagram</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a>
+                        @item.Id
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.Nome
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.DataDeNascimento
+                    </a>
+                </td>
+                <td>
+                    <a href="Registros/Show/@item.Id">
+                        Mostrar Telefones
+                    </a>
+                </td>
+                <td>
+                    <a href="Registros/Show/@item.Id">
+                        Mostrar Endereços
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.CPF
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.RG
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.Facebook
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.Linkedin
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.Twitter
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        @item.Instagran
+                    </a>
+                </td>
+                <td>
+                    <a href="Registros/Edit/@item.Id">
+                        Alterar
+                    </a>
+                </td>
+                <td>
+                    <a href="Registros/Delete/@item.Id">
+                        Deletar
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <script>
+        function Filter() {
+
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Nome");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("a")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>

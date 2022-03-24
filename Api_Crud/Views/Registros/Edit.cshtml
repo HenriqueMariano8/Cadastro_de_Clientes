@@ -1,0 +1,192 @@
+﻿@model Api_Crud.Models.Registros
+@{
+    ViewBag.Title = "Editar Registro";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<style>
+    form {
+        float: left;
+        width: 100%;
+    }
+
+    h2 {
+        position: relative;
+        float: left;
+        margin: 20px 0;
+    }
+
+    .b-campo-multiplo {
+        position: relative;
+        float: left;
+        width: 100%;
+        height: 30px;
+    }
+</style>
+
+<form asp-controller="Registros" asp-action="Edit" method="post" class="form-horizontal" role="form">
+    <div class="form-horizontal">
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+    <div class="form-group3">
+        <label asp-for="Nome" class="col-md-12 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="Nome" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group3 FormRight">
+        <label asp-for="DataDeNascimento" class="col-md-12 control-label">Data de Nascimento</label>
+        <div class="col-md-12">
+            <input type="date" asp-for="DataDeNascimento" class="form-control" />
+        </div>
+    </div>
+    @if (Model.Telefone == null)
+        throw new ArgumentNullException(nameof(Model.Telefone));
+    <div class="form-group">
+        <label asp-for="Telefone" class="col-md-2 control-label"></label>
+        <div class="form-group campo-multiplo">
+
+            <a href="#" class="b-campo-multiplo" title="Telefone"> Adicionar Telefone </a>
+            @for (int i = 0; i < Model.Telefone.Count; i++)
+            {
+                <div class="col-md-12" style="float:left;">
+                    <select asp-for="TipoDeTelefone[i]" size="3" name="TipoDeTelefone">
+                        <option value="TelRes">Telefone Residencial</option>
+                        <option value="TelCel">Telefone Celular</option>
+                        <option value="TelCor">Telefone Comercial</option>
+                    </select>                         
+                    <input asp-for="Telefone[i]" class="form-control" name="Telefone" maxlength="15"/>
+                </div>
+                <a href="#" class="delete">Deletar</a>   
+            }
+        </div>
+    </div>
+    @if (Model.Endereco == null)
+        throw new ArgumentNullException(nameof(Model.Endereco));
+
+    <div class="form-group">
+        <label asp-for="Endereco" class="col-md-2 control-label">Endereço</label>
+        <div class="form-group campo-multiplo2">
+            
+            <a href="#" class="b-campo-multiplo2" title="Endereco"> Adicionar Endereço </a>
+            @foreach (var item in Model.Endereco)
+            {
+                <div class="col-md-12" style="float:left;">
+                    <input asp-for="@item" class="form-control" name="Endereco" />
+                    <a href="#" class="delete">Deletar</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="CPF" class="col-md-2 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="CPF" class="form-control" maxlength="11" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="RG" class="col-md-2 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="RG" class="form-control" maxlength="9" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Facebook" class="col-md-2 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="Facebook" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Linkedin" class="col-md-2 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="Linkedin" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Twitter" class="col-md-2 control-label"></label>
+        <div class="col-md-12">
+            <input asp-for="Twitter" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Instagran" class="col-md-2 control-label">Instagram</label>
+        <div class="col-md-12">
+            <input asp-for="Instagran" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-12">
+            <input type="submit" value="Atualizar" class="btn btn-default" onclick="return confirm('Tem certeza que quer alterar este item?')" />
+        </div>
+    </div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var max_fields = 5;
+        var wrapper = $(".campo-multiplo");
+        var add_button = $(".b-campo-multiplo");
+        var wrapper2 = $(".campo-multiplo2");
+        var add_button2 = $(".b-campo-multiplo2");
+
+        var x = 1;
+        $(add_button).click(function (e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                $(wrapper).append('<div style="width:100%; float:left;"><select size="3" name="TipoDeTelefone"><option value="TelRes">Telefone Residencial</option><option value="TelCel">Telefone Celular</option><option value="TelCor">Telefone Comercial</option></select><input type="text" name="Telefone" onkeypress="mask(this, mphone);" autocomplete="off" class="form-control-add" maxlength="15" /><a href="#" class="delete">Deletar</a></div>')
+            } else {
+                alert('Alcançou o Limite')
+            }
+        });
+        $(add_button2).click(function (e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                $(wrapper2).append('<div style="width:100%; float:left;"><input type="text" name="Endereco" class="form-control-add"/><a href="#" class="delete">Deletar</a></div>');
+            } else {
+                alert('Alcançou o Limite')
+            }
+        });
+
+        $(wrapper).on("click", ".delete", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+        $(wrapper2).on("click", ".delete", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+
+    });
+
+    function mask(o, f) {
+        setTimeout(function () {
+            var v = mphone(o.value);
+            if (v != o.value) {
+                o.value = v;
+            }
+        }, 1);
+    }
+    function mphone(v) {
+        var r = v.replace(/\D/g, "");
+        r = r.replace(/^0/, "");
+        if (r.length > 10) {
+            r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+        } else if (r.length > 5) {
+            r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+        } else if (r.length > 2) {
+            r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+        } else {
+            r = r.replace(/^(\d*)/, "($1");
+        }
+        return r;
+    }
+
+</script>
